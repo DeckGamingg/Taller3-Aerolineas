@@ -27,27 +27,23 @@ public class ConsolaArerolinea extends ConsolaBasica
         {
             unaAerolinea = new Aerolinea( );
 
-            // =========================================================
-            // 1) Crear datos mínimos para que el archivo tiquetes.json sea consistente
-            //    (ruta 4558 y un vuelo el 2024-11-05)
-            // =========================================================
-            Aeropuerto bogota = new Aeropuerto( "El Dorado", "BOG", "Bogotá", 4.701, -74.146 );
-            Aeropuerto medellin = new Aeropuerto( "José María Córdova", "MDE", "Medellín", 6.164, -75.423 );
+            unaAerolinea = new Aerolinea( );
 
-            Ruta ruta4558 = new Ruta( bogota, medellin, "08:00", "09:00", "4558" );
-            unaAerolinea.agregarRuta( ruta4558 );
+         // 1) Crear datos mínimos para que tiquetes.json sea consistente
+         Aeropuerto bogota = new Aeropuerto( "El Dorado", "BOG", "Bogotá", 4.701, -74.146 );
+         Aeropuerto medellin = new Aeropuerto( "José María Córdova", "MDE", "Medellín", 6.164, -75.423 );
 
-            Avion avionDemo = new Avion( "AVION_DEMO", 180 );
-            unaAerolinea.agregarAvion( avionDemo );
+         Ruta ruta4558 = new Ruta( bogota, medellin, "0800", "0900", "4558" );
+         unaAerolinea.agregarRuta( ruta4558 );
 
-            // Programa el vuelo que será referenciado por el tiquete del JSON
-            unaAerolinea.programarVuelo( "2024-11-05", "4558", "AVION_DEMO" );
+         Avion avionDemo = new Avion( "AVION_DEMO", 180 );
+         unaAerolinea.agregarAvion( avionDemo );
 
-            // =========================================================
-            // 2) Cargar los tiquetes
-            // =========================================================
-            String archivo = "tiquetes.json";
-            unaAerolinea.cargarTiquetes( "./datos/" + archivo, CentralPersistencia.JSON );
+         unaAerolinea.programarVuelo( "2024-11-05", "4558", "AVION_DEMO" );
+
+         // 2) Ahora sí: cargar tiquetes
+         String archivo = "tiquetes.json";
+         unaAerolinea.cargarTiquetes( "./datos/" + archivo, CentralPersistencia.JSON );
 
             System.out.println( "Carga exitosa de tiquetes. Clientes: " + unaAerolinea.getClientes( ).size( ) );
             System.out.println( "Vuelos programados: " + unaAerolinea.getVuelos( ).size( ) );
@@ -70,7 +66,6 @@ public class ConsolaArerolinea extends ConsolaBasica
         }
         catch( Exception e )
         {
-            // Por ejemplo, errores al programar el vuelo
             e.printStackTrace( );
         }
     }
