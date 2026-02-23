@@ -5,15 +5,66 @@ package uniandes.dpoo.aerolinea.modelo;
  */
 public class Ruta
 {
-    // TODO completar
+    private Aeropuerto origen;
+    private Aeropuerto destino;
+    private String horaSalida;
+    private String horaLlegada;
+    private String codigoRuta;
 
+    public Ruta( Aeropuerto origen, Aeropuerto destino, String horaSalida, String horaLlegada, String codigoRuta )
+    {
+        this.origen = origen;
+        this.destino = destino;
+        this.horaSalida = horaSalida;
+        this.horaLlegada = horaLlegada;
+        this.codigoRuta = codigoRuta;
+    }
+
+    public Aeropuerto getOrigen( )
+    {
+        return origen;
+    }
+
+    public Aeropuerto getDestino( )
+    {
+        return destino;
+    }
+
+    public String getHoraSalida( )
+    {
+        return horaSalida;
+    }
+
+    public String getHoraLlegada( )
+    {
+        return horaLlegada;
+    }
+
+    public String getCodigoRuta( )
+    {
+        return codigoRuta;
+    }
+
+    /**
+     * Calcula la duración de la ruta en minutos.
+     */
+    public int getDuracion( )
+    {
+        int salida = getHoras( horaSalida ) * 60 + getMinutos( horaSalida );
+        int llegada = getHoras( horaLlegada ) * 60 + getMinutos( horaLlegada );
+
+        // Si la llegada es "menor", asumimos que llega al día siguiente
+        if( llegada < salida )
+        {
+            llegada = llegada + ( 24 * 60 );
+        }
+
+        return llegada - salida;
+    }
 
     /**
      * Dada una cadena con una hora y minutos, retorna los minutos.
-     * 
      * Por ejemplo, para la cadena '715' retorna 15.
-     * @param horaCompleta Una cadena con una hora, donde los minutos siempre ocupan los dos últimos caracteres
-     * @return Una cantidad de minutos entre 0 y 59
      */
     public static int getMinutos( String horaCompleta )
     {
@@ -23,16 +74,11 @@ public class Ruta
 
     /**
      * Dada una cadena con una hora y minutos, retorna las horas.
-     * 
      * Por ejemplo, para la cadena '715' retorna 7.
-     * @param horaCompleta Una cadena con una hora, donde los minutos siempre ocupan los dos últimos caracteres
-     * @return Una cantidad de horas entre 0 y 23
      */
     public static int getHoras( String horaCompleta )
     {
         int horas = Integer.parseInt( horaCompleta ) / 100;
         return horas;
     }
-
-    
 }

@@ -130,6 +130,7 @@ public class PersistenciaTiquetesJson implements IPersistenciaTiquetes
             if( ClienteNatural.NATURAL.equals( cliente.getTipoCliente( ) ) )
             {
                 JSONObject jCliente = new JSONObject( );
+                jCliente.put( TIPO_CLIENTE, ClienteNatural.NATURAL );
                 jCliente.put( NOMBRE_CLIENTE, cliente.getIdentificador( ) );
                 jClientes.put( jCliente );
             }
